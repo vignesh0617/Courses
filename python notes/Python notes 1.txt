@@ -1,0 +1,451 @@
+
+									 ---------
+									| PYTHON  |
+ 									 ---------
+
+									  Basics :
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Interpreter - > Converts human readable code into machine code *LINE BY LINE*
+Compiler    - > Converts human readable code into machine code *FULLY*
+Python is case sensitive
+
+some usefeul tips:
+------------------
+1) # -> single line comment
+2) '''  ''' -> This is not ONLY a comment . anthing mentioned inside this 3 single quotes is a long string. anything  written for multiple
+	       lines can be saved inside a single variable and printed
+3) \ -> escape sequence
+4) print(f'Results of the {year} {event}') ...where the varaible are mentioned inside the {}
+5) [ start : stop : stepover] -> range function where start is inclusive and stop is exclusive
+				the stepover is optional to mention.if not mentioned the default step over will be 1
+	###############################################################################################################################
+		string = '012345678'
+		string[0] = 0
+		string[-1] = 8
+		string[::-1]= 876543210  -> this just reverses a string
+		string[::-4]=84
+		string[0:8:-1]= *null*
+		string[8:0:-1]=87654321
+	###############################################################################################################################
+
+6) Strings are immutable. Once assignes it cant be changed.(i.e) string[5] = '3' is not possible
+	The only way to change is to reasign the entire variable to new value. A part of string alone cant be changed
+7)Lists are mutable
+8) round() -> built in function
+   .upper() -> method
+9)Tuples are immutable list
+10) key words *is* ,checks if the two variables are in the same memory location
+    where as == checks for only the values are equal
+11)
+*******************************************************************************************************************************************************
+Data types
+*******************************************************************************************************************************************************
+a)Fundamental Data types
+------------------------
+	------------------------------------------------------------------
+	| NOTE : ALL THE BELOW KEYWORDS CAN BE USED FOR TYPECASTING ALSO |
+	------------------------------------------------------------------
+	
+	1) int - > integer is a whoe number 
+	2) float -> float is a decimal number    | x = 10.4569 , y = int(float("%.2f" %x)) . use "%.<n>f" %<varname> for rounding off a number
+	3) bool -> boolean is true or false
+	4) str -> String is sequence of characters
+	5) list(array) -> Collection of items
+	6) tuple -> tuple are immutable lists
+	7) set -> unordered collection of uniques objects inside {}
+	8) dict -> unordered key value pair dictionary
+	9) complex -> very very rarely used
+	10)None -> its none!! 
+	11)enumerate -> used with iterable.IT gives index and each items of the iterable when used in loop
+
+
+	###############################################################################################################################
+		Code:
+			for index,value in enumerate('VIGNESH'):
+				print(index,value)
+		output:
+			0 V
+			1 I
+			2 G
+			3 N
+			4 E
+			5 S
+			6 H
+			
+	###############################################################################################################################
+
+
+b)Classes  
+---------
+	custom types created by users
+
+c)Specialized Data types
+------------------------
+
+d)None
+------
+
+
+
+*******************************************************************************************************************************************************
+Math functions
+*******************************************************************************************************************************************************
+	round(<number>,<ndigits>) -> rounds to nearest whole number
+	abs() -> gives only positive value
+ 
+ mathematical operators ----->   + , - , /(float division) , * , **(power) , //(integer division)
+ 
+ logical operators ---------->	< , > , <= , >= , != , ==
+
+
+*******************************************************************************************************************************************************
+Operator precedence
+*******************************************************************************************************************************************************
+	() -> ** -> *,/ -> +,-
+
+*******************************************************************************************************************************************************
+Variables
+*******************************************************************************************************************************************************
+	snake case naming -> var_no_one .(i.e) using _ in place of spaces
+	camel case naming -> varNoOne
+	constanrs = vatiable names with full capital letters . eg , PI = 3.14
+
+*******************************************************************************************************************************************************
+List methods
+*******************************************************************************************************************************************************
+	.append()
+	.insert(element,index)
+	.pop()
+	.remove()
+	.count() -> give how many times the passed arg appear in the list
+	.extend()
+	.clear()
+	.index()
+	.sort()
+	.copy()
+	.reverse()
+
+*******************************************************************************************************************************************************
+String method
+*******************************************************************************************************************************************************
+
+	" ".join(<str>) or ",".join("1234")
+
+	###############################################################################################################################
+		string = ' '.join(array)
+			-->creates a string with a space between each element of array
+				note: we can use only string inside join method
+	###############################################################################################################################
+
+*******************************************************************************************************************************************************
+Dictionary
+*******************************************************************************************************************************************************
+syntax:
+	dictionary = { 
+			'a':1,
+			'b':2,
+			'c':3
+			}
+	note: Key can be any data type that is immutable.for eg:string,boolean,number.Mostly string is used
+
+Dictionry methods:
+	.get(key) -> gives the corresponding value of the key . If the key doesnt exist it doest not throw error instead return none
+	.keys() -> checks or iterates over keys
+	.values() -> checks or iterates over values
+	.items() -> returns all the key value pair
+	.update({key:value,key:value}) -> updates an existing key or adds new one
+
+	###############################################################################################################################
+		for key,value in dictionary: | for items in dictionary:
+			print(key,value)       |		key,value=items
+		output :                     |		print(key,value)
+			a 1
+			b 2
+			c 3
+	###############################################################################################################################
+
+*******************************************************************************************************************************************************
+Tuples
+*******************************************************************************************************************************************************
+	1) these are similar to lists but these are immutable
+	2)these do not support operations like sorting.
+	3)much faster than list
+	4)it has only 2 methods
+		a) .count(item)
+		b) .index(item)
+
+*******************************************************************************************************************************************************
+Sets
+*******************************************************************************************************************************************************
+	1)Unordered collection of unique items
+	2)Enclosed betweem {}
+	3)it doesnt allow entry of duplicate items inside it
+
+Note: the following methods performs venn diagram operations on sets
+
+Set methods:
+	.difference()
+	.difference_update()
+	.intersections()
+	.isdisjoint()
+	.issubset()
+	.issuperset()
+	.union()
+
+*******************************************************************************************************************************************************
+Basic syntax
+*******************************************************************************************************************************************************
+1) if (condtion):
+	............
+	............
+   elif (condition):
+	.............
+	.............
+   else:
+	......
+	......
+
+2) ternary -> mostly used for assignmet purpose 
+	
+	<value if true> if <condition> else <value if false>
+		################################################################################
+			eg 1: 
+				greater of two nos:
+				a=5
+				b=9
+				c= a if a>b else b
+				print(c)
+			OUTPUT = 9	
+			eg 2:
+				a=5
+				b=6
+				c=7
+				d= a if (a>b and a>c) else (b if b>c and b>a else c)
+				print(d)
+		################################################################################
+
+3) for <varaibale> in <iterable items>:
+	............
+	............
+
+4) while <condition>:
+	..........
+	..........
+	stepover  
+
+NOTE : else can be used along with while block!!!
+
+		################################################################################
+			eg 1: 
+				i=1
+				while i < 5
+					print(i)
+					i+=1
+				else:
+					print('over')
+			OUTPUT :
+				1
+				2
+				3
+				4
+				5
+				over	
+		################################################################################
+	
+*******************************************************************************************************************************************************
+FUNCTIONS
+*******************************************************************************************************************************************************
+syntax:
+	def <functionname>(para1,para2,...paraN,*args,**kwargs):   | here , * args takes any no of position arguments       |*<varname>
+		......						   |        and **kwargs takes any no of keyword arguments  |**<varname>
+		......
+		......
+		return <value>
+
+3types of functions: 
+	(a)Default parameters    -------> def say_hello (para1 = value1,para2 =value2)  --->if no arg is passed para takes the default values
+	(b)Positional parameters -------> say_hello(arg1,arg2) ---------------------------->args matches with the positions of para in function defintion
+	(c)Keyword arguments  ----------> say_hello(para2=arg1,para1=arg2 ) --------------->used when args position does not match with the para position
+
+*******************************************************************************************************************************************************
+ERROR HANDLING
+*******************************************************************************************************************************************************
+1)Common Existing errors.
+	a) syntax error
+	b) name error
+	c) index error
+	d) key error
+	e) dividion by zero error
+
+2) try except error.
+	try:
+		....	
+		....	
+		....
+	expect <error name 1>:
+		....	
+		....
+		....
+	except <error name 2> as <our custom name>:
+		....	
+		....
+		....
+	else:
+		....	|else gets executed only if the program
+		....	|gets executed succefully without any errors.
+		....	|
+	finally:
+		....	| finally gets executed every time.
+		....	| if the program excutes successfully finall gets executed.
+		....	| even if the program has errors it gets executed.		
+3) raise -> syntax:
+	raise <error name> -----> it raises the specified error.
+	raise Exception('type ur message here') ----> it is used to rasie our custom error message. 
+
+
+*******************************************************************************************************************************************************
+FILE HANDLING
+*******************************************************************************************************************************************************
+Reading operations:
+-------------------
+
+1) open : syntax
+	my_file = open('filepath+filename') ----> opens the mentioned file and saves it in the variable myfile.
+
+2) read :
+	my_file.read() -> this reads the entire file and gives the output
+	my_file.readline() -> reads the file line by line.
+			      as it is mentioned only once it will read only one line
+	my_file.readlines() -> reads all the file and stores each line details in the form of a text.
+
+3) seek:
+	myfile.seek(0) ----> moves the cursor to the starting of the file 
+
+4) close:
+	my_file.close() -> used for closing the file object.
+
+5) with : (short hand method)
+
+		with open('filename',mode ='r'/'w'/'r+'/) as <variable name>:
+			print(variable name.readlines())
+
+	by using this we need not close a file
+	by default the mode if not mentioned is set to r.
+	modes :
+		r -> opens a file in read only mode.default mode
+		w -> opens a file in write only mode. creates a file if not existing
+		r+ -> open a file in read ,write mode.when new text is added it by default gets added at the begining .it overwrites the 
+			exisiting content if we fail to mention the cursor postion(which will be by default at the begining).
+		a -> opens a file in wrtie mode and adds text at the end.
+
+ 
+*******************************************************************************************************************************************************
+Additional commands
+*******************************************************************************************************************************************************
+	type(<arg>) -> gives the data type of <arg>
+	bin(<arg>) -> gives the binary representation of a number in the format : 0b<binary rep>
+	int(string, base) -> converts the passes string to respected base. base = 2,4,8,16
+	
+		########################################
+			a=5
+			a=a+5 ----> a+=5
+		########################################
+	
+	range(strat,stop,stepover) -> start : inclusive(if not mentioned by default sets 0 ) ,stop : ecxlusive , increament : any math operations.
+
+		################################################################################	
+			list(range(10)) -> creates a list with items (0,1,2,3,4,5,6,7,8,9)	
+		################################################################################
+	
+	print(' ',end=' ') -> it helps in staying in the same line 
+
+	importing.syntax:
+		a) import <module name>
+		b) import <package name>.<module name>
+		c) from <package name>.<module name> import <model name>
+		d) from <package name>.<package name> import <module>
+		e) from <module name> import <method name>
+
+
+
+*******************************************************************************************************************************************************
+socket programming
+*******************************************************************************************************************************************************
+
+BASIC :
+-------
+	1) socket.socket() ------------> creates an socket object  -----> socket.socket(soclet.AF_INET,socket.SOCK_STREAM) --->same as socket.socket()
+	2) socekt.findhostname() ------> gives the name of the current machine we are working on
+	3) scoket.findhostbyname()-----> gives the ip address of the website or hosetname we pass as an arg
+
+	4) <socketobj>.connect((dst_ip_addresss,port_number)) ------>it is used to connect to particular ip address on the mentioned the port.
+
+SERVER SIDE :
+-------------									takes a tuple as an argument
+	5) <socketobj>.bind('',port) ---> binds the server machine to a particular port number for connecting to the client machines
+	6) <scoketobj>.listen()---------> listens for any incoming connection on the mentioned port number
+	7) <socketobj>.accept()--------> listens for any incoming connection.The program stops here untill it recevies any incoming connection
+						it gives two outputs. 1) socketobj 2) tuple ,consisting of the client ip address and the port number
+						at which it is connected the server machine.
+
+CLINET SIDE :
+-------------
+	7) <socketobj>.connect()--------> listens for any incoming connection.The program stops here untill it recevies any incoming connection
+						it gives two outputs. 1) socketobj 2) tuple ,consisting of the client ip address and the port number
+						at which it is connected the server machine.
+
+GENERAL :
+---------
+
+	8)<sockobj>.send("message".endcode(format))---> used send replies to clinet machine. where the format = the type of encoding
+	9)<sockobj>.recv(number) ---------------------> used to receive messages from the specified sockobj. the *number* specifies the number of bytes
+							to be received from the sockobj.
+
+
+									  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+								Adavanced:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+RegEx module : re
+-------------------
+
+sub function in re module:
+	match(pattern,string) ---> matches the pattern only if it occurs at the begining of the string
+	search(pattern,string)---> matches the pattern if it appears anywhere in the string
+	sub(patern,replacement,string,number of times)
+		replaces a particular pattern occuring in a string with "replacement" string. the "number of times" specifies exactly how many times 
+		the replacement shoud occur. its only optional
+	
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		----------------
+		|C PROGRAMMING:|
+		----------------
+
+HEADER FILES :
+	stdio
+	stdlib
+	unistd
+	winshock
+	winuser
+	wininet
+	windowsx
+	string
+	sys/stat
+	sys/types
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		----------------------------------
+		|uncovered ethical hacking topics|
+		----------------------------------
+	Double pulsar attck windows	
+	Blue keep vulnerabaility
+	RouterSploit
+	Windows 10 exploit remotely
+	
+	

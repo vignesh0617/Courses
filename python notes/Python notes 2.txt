@@ -1,0 +1,321 @@
+
+
+THEORY :
+--------
+	
+29th april:
+-----------
+	Strings are immutable.
+	
+	Lists are mutable
+		
+	Dictionaries are unorders stored key value pairs. it can not be sorted
+	
+============================================================================================================================================================
+
+	def name_of_function() : // this is how a function name should be, no cap letter used
+
+____________________________________________________________________________________________________________________________________________________________
+
+CODING:
+-------
+
+29th april:
+-----------
+
+	1) Variable assignments :
+
+			       [declaring variable]	
+		1) numbers --> x = 10
+		2) strings --> x = "hello" or 'heelo'
+		3) boolean --> x = True or False
+		4) lists  ---> x = [1,2,3,4]
+		5) tuples ---> x = (1,2,3,4) // everything is same as list. Only diff is, it is immutable
+				It has only 2 methods : count() , index()
+		6) dictionaries ---> x = { 1:"one",2:"two"}
+		7) sets -----> x = set()
+			       x = set(<arr var Name>) / set("<String variable name>")
+			       Adding element to a set:
+				x.add(<number>)
+
+		8) none ----> x = none //it is a way of creating a variable and keeping, but not assigning any values to it
+
+		9) files ---> x = open('<file name>.<extension>')
+
+		10) enumerate("<string value>") ---> it returns a list of tuples having (index,letter).
+							it is used in for loops often, when we need to have acess to both 
+							index and letter- in a string
+		
+
+	2)String operations:  x = "My name is"
+	--------------------       0123456789 --> +ve indexing
+				  10987654321 --> -ve indexing          
+		
+		2.1) slicing : [start:stop:stepover]
+				start --> included
+				stop ---> excluded
+				eg : x[0:6]
+				     x[::-1] --> reverses a srting
+		
+		2.2) len(x) --> 10 (inlcuding spaces)
+		
+		2.3) Concatenation : x + " vignesh"
+				     'z'*10 --> prints z 10 times
+
+		2.4) lower(),upper()
+
+	3) List operations:
+	-------------------
+		3.1) slicing operation similar to strings
+
+		3.2) concatination :
+			arr1 = [1,2,3,4]
+			arr2 = [5,6,7]
+			arr3 = arr1+arr3
+
+		3.3) append() --> arr1.append(5) --> [1,3,4,5]
+		3.4) pop() ----> arr1.pop() ---> removes and returns the last element of the array/list
+
+		3.5) pop(index) ---> removes the element at mentioned index
+		
+		3.6) sort() ---> arr1.sort() ---> it does not returns any value,just sorts the arr1
+	
+		3.7) reverse() --> reverses a list
+
+		3.8) count() --> x.count(<element>) ---> returns a number of times an element occurs in a list
+
+		3.9) index() --> x.index(<element>) returns the index of first occurance of an element7
+
+	4) Dictionaries operations: x = { 1:"one",2:"two"}
+	---------------------------	
+		4.1) Indexing : x[1] --> returns "one"
+
+		4.2) adding/editing key value pair : x [3] = "three"
+
+		4.3) x.key() --> returns the list of keys
+
+		4.4) x.values() --> returns the list of values 
+	
+		4.5) x.items() --> returns the list of (key,value) pairs
+
+
+	5) Filename operations:  x = open('<filename>',<modes>) // modes is optional. default is "r"
+	-----------------------
+		5.1) read() ---> contents = x.read() ---> stores all the contents in the file in a string format
+				
+				Note: If we try to read the contents of the file again. it will fail, bcz the cursor in the last line of the file
+				use the seek(<index no>) method to move the cursor to the required position
+		
+		5.2) readlines() 
+				Reading using file path:
+				contents = x.read("C:\\Users\\922120\\OneDrive - Cognizant\\Desktop\\filename.txt") // use double blackslashes
+		
+		5.3) seek() ---> used for moving the cursor.
+				 x.seek(0) --> moves the cursor to the beginging of the file
+
+		5.4) close() --> x.close()
+
+		Alternate of doing file operations: // advantage of using this is, the file pointer is automatically closed
+		
+			with open(<filename>.<ext>,mode='<modes>') as <varName>:
+				//all file operation
+
+		5.5) modes = r  : read only mode
+			     w  : write only mode. overwrites an existing file
+			     a  : append . used for adding lines at the end of the file
+			     r+ : reading & writing mode
+			     w+ : writinf & reading mode
+
+		5.6) write = x.write('<contens>')
+				if the file is opened in "w" mode, everything is overwritten
+				if the file is opened in "a" mode , everything is added at the end of the cursor
+
+
+
+	6) Conditioanl statement:
+	
+		6.1) if <condition> :
+			...
+			...
+		     elif :
+			...
+			...
+		     else:
+			...
+			...
+
+		6.2) for <iterable>:
+			...
+			...
+
+			Iterable used in for :
+				6.2.1) for i in range(<end number>) :
+				6.2.2) for i in range(<start number>,<end number>,<increament>) : // start -> included, end -> excluded
+				6.2.3) for <varname> in <arr name> :
+				6.2.4) for <varname> in <tuple name name> :
+				6.2.5) for <varname1>,<varname2> in <tuple name name> :
+				6.2.6) for <varname> in <dict name > :
+				           for <varname> in <dict name >.keys() :
+				6.2.7) for <varname> in <dict name >.values() :
+				6.2.8) for <varname> in <dict name >.items() :
+				6.2.9) for (index,letter) in enumerate("<string value>") :
+
+		6.3) while <condition>:
+			...
+			...
+			<updation>
+
+		6.4) Keywords used in loops & conditionals:
+			6.4.1) break
+			6.4.1) continue
+			6.4.1) pass
+
+==========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+	
+30th april:
+-----------
+
+	1) Functions:
+		Syntax :		
+			def <name_of_the_function>():
+				.....
+				.....
+				return ...
+
+	2) Passing args to functions :
+		2.1) Positional argument : def <name_of_the_function>(arg1,arg2):
+
+		2.2) Setting default values to positional args: def <name_of_the_function>(arg1=<default value>,arg2=<default value>):
+
+		2.3) Passing arbitary no.of argument : def <name_of_the_function>(*args): // the passed argument values are stored as tupples
+
+		2.1) Passing arbitary no.of argument with key value pairs(dicts) : def <name_of_the_function>(**kwargs): // the passed args are stored in form of dictionaries
+
+	3) map function:
+		syntax: map(<function>,<iterable>)
+
+		It returns a map object. if u need the result to be stored in a list ,use list() on top of map
+		Eg : list(map(<func>,<iterable>))
+				
+		
+	4) filter function:
+		syntax: filter(<function>,<iterable>)
+
+		It returns only the elements which give "true" output when passed inside the function argument.
+		if u need the result to be stored in a list ,use list() on top of map
+		Eg : list(map(<func>,<iterable>))
+
+	5) lambda expressions:
+		
+		def sqaure(num)	:---------\____same as------> lambda num : num**2
+			return num**2 --------/
+
+		lamda functions can be used on map,filter etc
+				
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+ERRORS FACED:
+--------------
+
+
+==========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+UNDERSTANDINGS
+--------------
+	1) list(range(10)) --> generates a list of numbers from 0 to 9
+	2) list(range(10,20)) --> generates a list of numbers form 10 - 19	
+
+	3) Flattening of lists:
+
+		3.1) basic range
+		mylist = [] ---------------\  
+		for num in range(10): ------\____--- Same as ---> mylist = list(range(10))
+			mylist.append(num)--/
+
+
+		3.2) basic arr
+		mylist = [] ---------------\  
+		for num in [1,2,3,4]: ------\____--- Same as ---> mylist = [num for num in [1,2,3,4]]
+			mylist.append(num)--/
+
+
+		3.3) basic num operations with arr
+		mylist = [] ------------------\  
+		for num in [1,2,3,4]: ---------\____--- Same as ---> mylist = [num**3 for num in [1,2,3,4]]
+			mylist.append(num**3)--/
+
+
+		3.4) basic num operations in 2X2 arr
+		mylist = [] ----------------------------\  
+		for num1 in [1,2,3,4]:-------------------\
+			for num2 in [5,6,7] --------------\____--- Same as ---> mylist = [num1*num2 for num1 in [1,2,3,4] for num2 in [5,6,7]]
+				mylist.append(num1*num2)--/
+
+
+		3.5) Basic num operation with If condition in arr
+		mylist = [] ---------------------------\  
+		for num in [1,2,3,4]:-------------------\
+			if num%2==0: --------------------\____--- Same as ---> mylist = [num for num1 in [1,2,3,4] if num%2==0]
+				mylist.append(num1*num2)-/
+
+
+		3.5) Basic num operation with If else condition in arr
+		mylist = [] ---------------------------\  
+		for num in [1,2,3,4]:-------------------\
+			if num%2==0: --------------------\____--- Same as ---> mylist = [num if num %2==0 else 'odd' for num1 in [1,2,3,4]]
+				mylist.append(num1*num2)-/
+			else : -------------------------/
+				list.append('odd') ---/
+
+
+	4) Only way to add new items to a list is using append() method
+
+
+	5) varname = [...] ---> what we declare here is list and not array
+		To use array use either numpy.array(<list>,dttype=<datatype>) or arr.array()
+
+		Lists are not capable of performing athmetic operations only arrays can do arthmetic operations
+
+		
+==========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+EXTRAS:
+-------
+
+	1) Rounding off in python using printf:
+		
+		code : x=22/7
+		       print(f" the value of pi is {x : .2f}")
+		                      
+                                            {<value> : <width>.<percisoin>f}
+
+	2) Os commands:
+		code : import os
+			os.getcwd() --> current working directory
+			os.listdir() -> list all files in cwd
+			os.chdir("path") --> changes the working directory
+			
+
+	3) x++ wont work here. use x+=1
+
+	4) The .join() method may be useful here. The .join() method allows you to join together strings in a list with some connector string. 
+	   For example, some uses of the .join() method:
+
+		>>> "--".join(['a','b','c'])
+		>>> 'a--b--c'
+
+	5) Removing duplicates from list:
+		arr = [1,1,1,1,2,2,2,2,3,3,3,4,4,4,5,5,5]
+		uniqueElements = list(set(arr))
+
+	6) Removing spaces from a string:
+		str = "This is a demo"
+		str = str.replace(' ','')
+
+==========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+			
+
+
+
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________

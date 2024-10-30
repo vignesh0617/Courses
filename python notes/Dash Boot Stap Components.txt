@@ -1,0 +1,132 @@
+Dash Boot Stap Components:
+--------------------------
+
+	Importing :
+		
+		code : import dash_bootstap_components as dbc
+
+	Using themes in Dashapp :
+
+		In general :
+
+			code : app = Dash(__name__,external_stylesheets =[dbc.themes.<THEME_NAME>] )
+
+		For graphs :
+
+			code :  load_figure_template(<THEME_NAME>)
+
+		For dcc core components:
+				
+			code : 
+				dbc_css = 'https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css'
+				app = Dash(__name__,external_stylesheets =[dbc.themes.<THEME_NAME> , dbc_css] )
+
+				dcc.dropdown(
+					...
+					...
+					className = "dbc"
+				)
+
+
+		Using Grid Layout :
+
+			Note : cols are divided equally by 12 parts. If no width arg is passed to dcc.Col() then all cols inside a row are equally spaced
+
+			code : 
+			app.layout = html.Div ([ // or html.Container([
+
+				html.Row([
+					html.Col([
+						html.Card([....])
+					],width = 2),
+					html.Col([
+						html.Card([....])
+					],width = 6),
+					html.Col([
+						html.Card([....])
+					],width = 4)
+				]),
+				html.Row([
+					html.Col([
+						html.Card([....])
+					]),
+					html.Col([
+						html.Card([....])
+					]),
+					html.Col([
+						html.Card([....])
+					])
+				]),
+				html.Row([
+					html.Col([
+						html.Card([....])
+					]),
+					html.Col([
+						html.Card([....])
+					]),
+					html.Col([
+						html.Card([....])
+					])
+				])
+
+
+			])
+
+
+============================================================================================================================================================
+
+To use icons in Dash :
+	
+	code:
+
+		from dash import Dash
+		import dash_bootstrap_components as dbc
+		app = Dash(__name__, external_stylesheets = [dbc.icons.BOOTSTRAP])
+
+============================================================================================================================================================
+
+demo code 1 : basics of applying css
+---------------------------------------
+
+
+from dash import Dash, html, dcc
+from dash.dependencies import Output, Input
+from jupyter_dash import JupyterDash
+from dash_bootstrap_templates import load_figure_template
+import dash_bootstrap_components as dbc
+import plotly.express as px
+import pandas as pd
+import numpy as np
+
+rand_data = np.random.randint(1,25,(2,25))
+dataset = np.random.randint(1,6,(1,25))
+
+df = pd.DataFrame(data = list(zip(rand_data[0][:],rand_data[1][:],dataset[0][:])),columns = ['x','y','dataset'])
+
+dbc_css = 'https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css'
+app = JupyterDash(__name__,external_stylesheets = [dbc.themes.SLATE, dbc_css])
+
+load_figure_template('SLATE')
+
+app.layout = html.Div([
+    "Choose datasets",
+    dcc.Dropdown(
+        id = "dataset",
+        options = df["dataset"].sort_values().unique(),
+        className ="dbc",
+        value = 1
+
+    ),
+    dcc.Graph(
+        id = "graph"
+    )
+])
+
+@app.callback(Output("graph","figure"),Input("dataset","value"))
+def update_fig(dataset):
+    filtered_data = df.query("dataset == @dataset")
+    fig = px.line(filtered_data, x='x',y='y')
+    return fig
+
+if(__name__) == "__main__":
+    app.run_server(mode = "inline")

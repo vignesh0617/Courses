@@ -1,0 +1,600 @@
+Data Analysis and Data visualization in python:
+================================================
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+8th March 2023:
+
+Numpy (Numerical Python)
+-----
+
+	Basics : 	1) Tool used to perform variuos array operations
+			2) 0 axis --> rows, 1 axis --> cols(in multi dimentionsal array)
+			3) numpy offers more data types than the conventional typer provided by python
+				For Eg : longdouble data type in python provides more accurate results. 
+				int(1) --> gives back 1 of int data type , like wise
+				np.longdouble(1) --> gives back 1 of longdouble data type
+
+					      1 axis
+					    -----------
+				arr2d = [ [x,x,x,x,x]    |
+					    [x,x,x,x,x]    |
+					    [x,x,x,x,x]    | 0 axis 
+					    [x,x,x,x,x]    |
+					    [x,x,x,x,x] ]  |
+
+
+	Coding:
+	-------
+
+		1) Importing : import numpy as np
+
+		2) converting a list to array :
+			syntax : np.array(<n dim list>,dttype=<data type>) # dttype in optional
+			list1 = [1,2,3,4,5]
+			arr1 = np.array(list1)
+
+		3) Array attributes :
+			arr1.shape ---> gives the shape of array // (row,col)
+
+		4) Numpy methods:
+			np.shape(arr1) ---> displays the shape of array
+
+		5) Indexing and Slicing:
+			1 dim array : arr[<start index inclusive>:<end indiex exclusive>:<step over>]
+
+			2 dim array : arr[:::,:::] {before comma is for slicing rows, after comma is for slicing columns}
+
+			We can even reassign all ements to np.array using slicing:
+				Eg : arr2d[:] = 1 --> makes all elements of arr2d to 1
+
+		6) Boolean indexing or filtering:
+
+			6.1) arr2d[arr[2d]>3] ---> this will essentially filter and give all the elements greater than 3, But it will be an 1d array in output
+
+		7) Array Manipulation:
+			i) np.reshape(<array>,(<row>,<col>)) or arr2d.reshape(<row>,<col>)
+			ii) np.ndarray.flatten(arr2d) or arr2d.flatten() or np.ravel(arr2d)
+			iii) np.concatenate((<arrays to concat>),axis=n) ----> Its used to join 2 arrays into one. n can be 0{x axis} or 1{y axis}
+												By default axis takes 0 . i.e it merges arrays row wise.
+												To merge arrays row wise, arrays musht have same column number & vice versa
+			iv) np.transpose(<arr>) or arr2d.transpose()
+			v) np.sort(<array>,axis=n) or arr2s.sort(axis=n) ----> Sorts an array row wise or column wise. By default n takes last axis value (-1). 
+												i.e for 2 dim array n takes 1. for 3 dim array n takes 2 and so on.
+												
+
+		8) Array Creation:
+			i) np.full((m,n),<fill value>,<datatype>) ---> this function creates a matrix of mxn each element as fill value with data type.
+			ii) np.arange(<start value inclusive>, <end value exclusive>, <step>,<dt type>) ---> used to create a matrix 
+			iii) np.linspace(<start inclusive>,<stop inclusive>,<no.of elements>) ----> creates a matrix of n number of elemnts with even distribution of numbers
+			iv) np.random.rand(<row>,<col>) ---> creates a random array of size mxn
+			v) np.random.randint(<start>,<stop exclusive>,<no.of elements>) ---> creates 1 dim array of random n elements
+			vi) np.random.randint(<start>,<stop exclusive>, (<row>,<col>)) ----> creates 1 dim array of random mxn elements
+			vii) np.ones((m,n)) --> creates an array with 1's of size mxn
+
+
+		9) Arthmetic operations :
+			i) addition , subtraction, mult, divi: arr1+arr2+arr3 ---> one condition all arrays should have (same size) or (1 row and same number of 														columns). while doing these operations, a spl function called "broadcasting" 
+													happens in the backend when an array has 1 row but same no.of cols. 
+			ii) np.sum(<arr2d>) ---> adds all elements
+			iii) np.sum(arr,axis=n) ---> sums elements along x or y axis
+			iv) np.cumsum(arr) ---> cumulative adds each element and give 1 dim array as output
+			v) np.cumsum(arr,axis="none"{by default}) ---> adds elemsts along row or col
+			vi) np.amax(arr) ---> finds max element from the array
+			vii) np.amax(arr,axis="none"{by default}) ---> finds max element along row or col
+			viii) np.amin(arr) ---> finds min element from the array
+			ix) np.amin(arr,axis="none"{by default}) ---> finds min element along row or col
+			x) np.mean() --> all like above desc
+			xi) np.count_nonzer(arr) ---> counts the no.of non zero elements from an array
+
+		10) Input ouptput operations:
+			i) np.loadtxt() ---> browse when required
+			ii) np.savetxt() -----> browse when required
+
+
+
+============================================================================================================================================================
+Understandings :
+	1) By default python uses only list and not arrays when we declate something with in [].
+	2) lists are not capable of performing direct arithmetci operations where as numpy.array() objects can perform direct math operations
+	3) Diff between using np.<methodname>() and arr2d.<methodname>()
+		The former gives the required output but does not chage the value of passed to it
+		The later does not give output but it chages the value of array calling the function.
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+9th March 2023:
+---------------
+
+Pandas:
+	Basics: It is built on top of NumPy
+		  It has 2 data types : Series & DataFrames
+
+								|------------------------> this is called index {row labels}
+				 SERIES				|DATA FRAMES
+				Index	Data			| A B C D E F  ----------> this is called Columns {column labels}
+				0	x			0 x x x x x x
+				1	x			1 x x x x x x
+				2	x			2 x x x x x x
+				3	x			3 x x x x x x
+				4	x			4 x x x x x x
+				.	.			. . . . . . .
+				.	.			. . . . . . .
+				n	x			n x x x x x x
+
+	Coding: 
+		1) Importing pands: import pandas as pd
+
+		2) Creating Series: // imp note : We use "S" captial S for creating series
+			series = pd.Series(data=<data of list, tuple, dict, array>, index = <data of list, tuple, dict, array> , dtype=<data type>)
+				If nothing is passed to data --> NaN (Not a number) value is filled by default
+				If nothing is passed to index --> indexing will be done as normal arrays i.e starting from 0 to n-1
+				If elements of diff data types are passed, "object" is the data type allocated to all elements
+
+		3) Creating DataFrames: // imp note : We use "D" & "F" captial D & F for creating drames
+			series = pd.DataFrame(data=<data of list, tuple, dict, array>, index = <data of list, tuple, dict, array> , columns = <column labels>,dtype=<data type>)
+				If nothing is passed to data --> NaN (Not a number) value is filled by default
+				If nothing is passed to index --> indexing will be done as normal arrays i.e starting from 0 to n-1
+				If nothing is passed to columns --> column label will be done as normal arrays i.e starting from 0 to n-1
+				If elements of diff data types are passed, "object" is the data type allocated to all elements
+
+		Creating data frames is smiliar to creating series only diff is we pass "columns" as additional parameter
+
+		
+14th march:
+-----------
+
+DATA MANIPULATION using Pandas (selecting, sorting, slicing, filtering, grouping, altering column labels & row index)
+
+		4) DataFrame methods : syntax : pd.<method_name>()
+			4.1) set_index(keys, drop = True, append = False, inplace - false) ---> use to set new index
+					Keys ----> Column name or array of same length as no.of rows
+					drop -----> default value is true. This will dop the current column and make it as an index when its set to true and vice 								versa for False.
+					append ---> default value is false. This is append as column to the existing index
+					inplace --> default value is false. By default the changes wont reflect in the data frame, it only returns an output. Inorder 							to make changes to the data frame, make the inplace value as True
+
+			4.2) reset_index(levels=None, drop=False, inplace=False) ------> it will reomve all existing index and creates a default index starting 															from 0 to n
+					levels ---> used only in multiindexing data frames
+					drop -----> it will try to insert the index which is goin to be removed as a column when value is set to false.
+					inplace --> same exp as above
+
+#####################################################################################################################
+#		Coding Examples :
+#
+#	import pandas as pd
+#	row_index = [1,2,3,4,5]
+#	column_labels = ['A','B','C']
+#	data = [[1,2,3],[4,5,6],[7,8,9],[10,11,12],[13,14,15]]
+#	df = pd.DataFrame(data,row_index,column_labels)
+#
+#	#--------set_index()
+#	df.set_index('C')
+#	df.set_index(keys=['C','B'],inplace=True,drop=False)
+#	
+#	#--------reset_index()
+#	df.reset_index() # if this pops error, stating any col can not be inserted, then set "drop = True" to resolve it
+#	df.reset_index(drop=True)
+#####################################################################################################################
+
+			4.3) iloc[] -------> accessing DataFrame data using array indexing. It returns rows and cols without any indexing 
+				Eg : df.iloc[<row index>,<col index>] // row & col index starts from 0 to n
+					df.iloc[4] ---> returns 5th row
+					
+					This function can use array indexing and slicing same as numpy array indexing and slicing.
+
+			4.4) loc[] ---------> similar to iloc. only diff is, here we use exact row and col labels for slicing and indexing the data
+					Eg : df.iloc[<row index>,<col index>]
+
+					df.loc[5] ---> returns 5th row
+					df.loc[5:12] --> returns 5th to 11th row
+					df.loc[[2,5,9]] ---> returns 2,5 & 9th row
+
+					df.loc[5,'<COL1>'] ---> returns 5th row and col1
+					df.loc[5:12, '<COL1>':'<COL12>'] --> returns 5th to 11th row and 1th to 12th col
+					df.loc[[2,5,9],['<COL1>,<COL18>,<COL12>']] ---> returns 2,5 & 9th row and 1st,18th and 12 col
+
+		5) read_csv(filepath_or_buffer, sep, header, index_col, usecols, ... other args)  ----> used for reading csv files
+			coding : pd.read_csv(...)
+
+			filepath_or_buffer --> give the filename of the csv file or mention the full path when located in some other folder
+			sep -----------------> by default ',' is used as sep. change it as required
+			header --------------> by default uses 1 row as col labels, change is when required
+			index_cols ----------> by default none. mention any one col label to use it as index
+			use_cols ------------> give the col number to include any specific column. By default it takes all cols from the csv file
+
+		6) filtering records :
+			df[df['<column label>']==<condition>]. 
+				# (df[<column label1>] == <condition1>) & ( df[<column label2>] == <condition2> ) ---> this is how we can create filter condition 									   for dataframes
+
+				Note use & --> for and operation
+				     use | --> for or operation
+				     use ~ --> for converting the output to opposite inside brakets(). Eg : ~(df['A']==10) 
+
+		7) isin() ----> used to check if a column contains a list of given values
+			Eg . df['A'].isin((10,20,30))
+			     ~df['A'].isin((10,20,30)) // for this alone no need to use () for converting to the opposite
+
+		8) Attributes :
+			df.columns ---> returns the list of column lables
+			df.index
+			df.dtypes ----> gives data types of all columns
+
+
+		9) df.rename(<index> , <columns> , <inplace>) ---> used to rename a column or row label
+				index ---> pass in dictionary with old row label as key and new row label as Value
+				columns -> pass in dictionary with old column label as key and new column label as Value
+				inplace -> same as above
+
+		10) df.drop (index,columns,inplace) --> all same as rename but here we use list and not dictinary. its used to drop the columns
+
+		11) adding new columns:
+
+			Eg : df[<new col label] = list of values or any other col operations
+				
+
+		13) df[<column label>].astype(<new data type>) --> used for converting one col data type to another
+		14) df[<column label>].apply( <any function / lambda function>) ---> it applies that particular function or lambda function to evry elemnts and 														returns the result. its similar to map/filter function in java script	
+
+
+		15) df.to_datetime('<column label>', format = '<the format how we want>') # look
+			
+				%d: Returns the day of the month, from 1 to 31.
+				%m: Returns the month of the year, from 1 to 12.
+				%Y: Returns the year in four-digit format (Year with century). like, 2021.
+				For more visit : https://pynative.com/python-datetime-format-strftime/#:~:text=Use%20datetime.strftime(format),hh%3Amm%3Ass%20format.
+
+		16) df.sort_values(<by>,<ascending>,<inplace>)
+				by ---> column or array of columns to sort by
+				ascending ---> True by default. If set to false, sorts descending
+				inplace -----> false by default
+
+		17) df.head() ---> shows first 5 rows
+		    df.tail() ---> shows last 5 rows
+
+15th March:
+-----------
+	
+		18)  formatting date col :
+
+			import datetime as dt
+			df['<time col label>'].dt.strftime('%b-%y')
+
+		19) df.transpose() ---> transposes row and column
+
+		20) df.explode(column='<column label>') ---> used to convert a nested col values to separate rows
+
+		21) df.reindex(columns=[<col1>,<col2>,<col3>])  ---> used for changing the order of cols displayed
+
+
+		22) Aggregation operations : 
+			22.1) max() , min() , mean() , sum() ,std() {standard deviation} , count() // syntax: df['<col_label>'].<ag function>()
+
+			22.2) df.describe() ---> gives an output of all above in detail for numberical col alone
+
+			22.3) df['<col label>'].unique() ---> gives list of unique values in a col	
+			22.4) df['<col label>'].nunique() ---> gives no of unique values in a col	
+
+			22.5) df.groupby[by='<col label or list of cols>'] ----> it return a groupby object on which the agg functions can be applied
+													By default what ever cols we pass becomes the key. In order to keep the cols 														as cols, to avoid this add this parameter as_index=False
+
+			22.6) df.agg(<list of all function names in [22.1]>)  --> here we can pass a single or multiple aggregate function values as strings
+														and those operations alone will be performed. It is similar to describe.
+														Describe does all aggregate function , while 'agg' function performs 															only the ones we pass in as parameter
+
+
+			22.7) df.pivot_table(index='',columns='', values='' ,agg= , fill= 0) ---> used to create a pivot table
+					index -----> here mention the column labels that u want to come as rows
+					columns ---> here mention the column labels that u want to come as cols
+					values ----> here mention the column labels that u want to perform calculations
+					agg -------> specify what aggregate function u want to perform 
+					fill ------> what value to fill instead of NaN's
+
+		23) Transform operation:
+			23.1) melt : ---> used to split a row into multiple rows.
+
+				df.melt(id_vars = <column name or list of col names that needs to be present as col>,
+					  value_valrs = <column name or list of col names that which should come in rows>, 
+					  var_name = '<mention the col name for splitted cols>',
+					  value_name = '<mention the col name for the value of the splitted cols->') 
+
+		24) Filtering
+
+			1) df.query("<col name> <condition> <value>") ---> this works as an sql where clause
+			2) df.select_dtypes(include = "number") ---> this will give all col which is having number as its dtype
+			
+			
+
+17th March:
+-----------
+
+	Data cleansing: (removing spaces, formatting data as we expect)
+	---------------
+		
+		1) Removing spaces from statring and ending:
+			use "strip" method "along" with apply method
+
+			eg code : df ['employees'] = df['employees'].apply(lambda x : x.strip())
+
+		2) Finding and handling values with "null"
+
+			2.1) df.isna() / df.isnull() ----> gives an array of boolean values stating if a value is null or not
+			2.2) df.dropna( axis = {0/1}, thresh= {1 to n})
+
+					axix --> 1 : drops cols
+						   0 : drops rows
+
+					threshold : drops rows or cols, if the no.of filled values row or col is less than threshold value
+
+			2.3) df.fillna(value = {<any value>} , method = {'backfill'/'bfill'/'ffill'/'pod'} , axis = None , inplace = {T/F})
+
+					value ----> this valu gets filled instead of nulls
+					method ---> backfill / bfill : uses the next value of null to fill the nulls
+							ffill / pad : uses the last value of null to fill the nulls 
+							default is null
+					axis ------> 0 or 1 .defailt is null
+						      
+	
+	Data Joining:
+	-------------	
+		
+		1) df.concat( <list of data frame objects> , axis = {0/1} ) ----> used to join 2 or more df's along row wisr or col wise
+
+		2) df.join( other = {} , on = {} , how ={} ) ----> used fo joining 2 df's based on col value. similar to left join, inner join in sql
+					other -----> variable name of the another df to join 
+					on --------> col name from main df on which it should join 2 df's
+					how -------> left, inner, right & outer . default is left
+
+			disadvantage of join method is : the df passed to other argument will compare only the index value for joining.
+
+			Eg code : employees.join(dept.set_index('dept id'),on='id', how ="inner")
+
+		3) pd.merge( <left>, <right>, <left_on> , <right_on> , <how>)
+
+				left ------> mention the left df
+				right -----> mention the right df
+				left on ---> col name from left df on which join should be performed
+				right on --> col name from right df on which join should be performed
+
+
+	Window opertaions:
+	------------------
+			Used for performing arthmetic operations on cols.
+
+				1) df.expanding().<agg functions> ----> used to perform agg functions on cols cummulatively
+				2) df.rolling(<n>).<agg functions> ---> used to perform agg functinos on prevoious 'n' cols
+
+
+	Inputs and optputs in pandas:
+	-----------------------------
+			Excel & csv 
+
+					Inputs: pd.read_excel('filepath/filename.xlsx', sheet = <sheet name>)
+						  pd.read_csv('filepath/filename/csv')
+
+					outputs : df1.to_excel('filepath/filename.xlsx')
+						     df1.to_csv('filepath/filename.xlsx')
+
+
+			HTML websites:
+
+					Code:
+						step 1 : declare the url
+	
+								url = <url to website>
+
+						step 2 : read the website:
+		
+								websitetables = pd.readhtml(url , match='<table name to match>')
+
+						step 3 : we can iteratie over different tables by indexing
+	
+								websitetables[0]
+								websitetables[1]
+								websitetables[2]
+								
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MATPLOTLIB:
+-----------
+
+Theory:
+------
+
+	1) Default plot size 6.8 inches wide x 4.8 inchecs height
+
+
+
+Coding:
+-------
+
+	Syntaxes :
+	----------
+
+		1) importing : import matplotlib.pyplot as plt
+
+
+		2) Figure/ Plotting area
+
+			fig = plt.figure() ------------------------------> used for creating a plotting area on which all types of charts will created on
+
+		3) Axes is plotting area:
+
+			axes1 = fig.add_axes( rect = <list of 4 values> ) ----> used for creating axes(x,y axis) . rect takes 4 values they are :
+												1) left distance from plotting area, 2) bottom distance from plotting area
+												3) width of x axis and 4) height of y axis
+											All these values are converted to %. For eg 1 --> 100% . 3 ---> 300 %. 0.5 --> 50 %
+
+				EG : 
+					fig1 = plt.figure()
+					axes1 = fig1.add_axes(rect = [0,1.3,0.8,0.8])
+					axes2 = fig1.add_axes(rect = [1,1.3,0.8,0.8])
+					axes3 = fig1.add_axes(rect = [2,1.3,0.8,0.8])
+					axes4 = fig1.add_axes(rect = [0.2,0,0.95,0.95])
+					axes5 = fig1.add_axes(rect = [1.7,0,0.95,0.95])
+
+		4) Axes methods:
+		-----------------
+			4.1) axes1.set_xlim(<starting value>, <max value>) ----> sets the statring value of axis and max value of axes passed as parameters
+			4.2) axes1.set_ylim(<starting value>, <max value>) ----> same as above but for y axis
+			4.3) axes1.set_xlabel( '<any label>' ) ----> used for displaying labels at the bottom of x axis
+			4.4) axes1.set_ylabel( '<any label>' ) ----> used for displaying labels at the left of y axis
+			4.5) axes.set_title( '<any title>' ) ---> Adds a title at the top of the chart
+
+		5) Subplots (used for creating mxn axes in a figure using single line of code)
+		
+			plt.subplots(<rows>,<cols>, tightlayout = True{this gives more space between axes}>) ----> it returns a tuple consisting of (figure,<n d 																				array of axes> )
+
+			fig , axes = plt.subplots(2,2,tight_layout = True) or fig , [[a1,a2],[a3,a4]] = plt.subplots(2,2,tight_layout = True) 
+
+			All the axes methods can be used on the axes as well
+		
+		6) Bar Grpahs :
+
+			6.1) Vertical bar graph
+	
+				axes1.bar(x = <list of values or df['<col name>']> , height = <list of values or df['<col name>']>)
+		
+			6.2) Horizonatl bar graph
+		
+				axes1.barh(y = <list of values or df['<col name>']> , width = <list of values or df['<col name>']>)
+
+
+			6.3) Other option parameters for bar graphs:
+
+				color = color of the bar
+				edgecolor = edgecolor for bar grpah 
+
+		7) Line Graphs :
+
+				axes1.plot(<list of x values>,<list of y values>, <list of y values used for projecting future values>)
+
+						or
+
+				axes1.plot('<col label for x>' , '<col label for y>' , data = <data frame name containing data>)
+
+
+			Other params:
+				color = 
+				aplha = any number. used for changing the line opacity
+				marker = browse to see available markers
+				linestyle = browse to see available linestyles
+
+		
+
+		
+
+
+
+
+
+
+
+
+			
+			  
+
+============================================================================================================================================================
+
+Understandings:
+--------------
+
+		1) Difference between Series and numpy 1d array is series have index which can be defined by us and it accepts elements of different data types
+			where as numpy arrays wont allow this.
+
+
+		2) Another way to find the no.of uique values in a column in df:
+			unique_values = set(df['<column_label>']) // we convert the oputput of df selection to set. Bcz set does not allow duplicate entries by 				lenth = len(unique_values)			//	default and there by we can remove the duplicates
+
+		3) Selecting Particular row and cols in df:
+			Eg : df[0:10][['STATUS','Magnitude']] 
+			
+			Explanation:
+				df[<row>][<col>]
+					row --> [::] or [:]  // here we can not pass array of rows . it will throw an error. To pass array of rows use loc function
+					col --> [[<col1,col2,col10]] // here we can not slicing of columns as index
+
+			Use loc function for better indexing and slicing
+
+		
+
+		4) list( zip(list1,list2,list3) ) ----> it is give an output that looks like . It can be use to give as an data to dataframe in pandas
+							
+							     ((list1.0, list2.0, list3.0),
+								(list1.1, list2.1, list3.1),
+								(list1.2, list2.2, list3.3),
+								..........................
+								..........................								
+								(list1.n, list2.n, list3.n), )
+								
+
+		
+		5) df.apply(lambda x : x) ----> here x is actually df[<collabel>]. i.e it access data in each column as a single series. and its not possible 									perform the desired operations on each element in df by accessing x in above code. To access each element in 								df use the below sample code
+
+			Below is sample code for replacing each " " {emply spaces} values in a df with word "Blanks"
+
+			df.apply(lambda coldata : coldata.apply(lambda x: "Blanks" if x==" " else x))
+
+	
+	
+			where as df['<collabel>'].apply(lambda x : x) ---> this gives each element inside the column value
+
+
+		6) Steps to create a chart in matplotlib
+
+		Step 1 : creating a figure (plotting area)
+
+				fig = plt.figure()
+
+		Step 2 : adding axes to the figure
+
+				axes1 = fig.add_axes( rect = [0,0,0.8,0.8] )
+				axes2 = fig.add_axes( rect = [0,1,0.8,0,8] )
+
+		Step 3 : changing the axes values and labeld
+			
+				axes.set_xlim(0,100)
+				axes.set_ylim(0,30)
+				axes.set_xlabel('X label')
+				axes.set_ylabel('Y label')
+
+		Step 4 : plotting graphs
+
+				axes.bar(x=<>,heigh=<>)
+
+
+
+Plotly Express :
+	To use any custom data to show in any figures :
+	 Step 1 : add *custom_data = ['col name in df] * in the figure 
+	 Step 2 : fig.update_traces(texttemplate = "%{customdata[0]}")
+	
+
+
+============================================================================================================================================================
+
+
+	Code backups :
+	--------------
+
+	PANDAS:
+
+		def find_transfered_untransfered_records(source,destination):
+    			comparission = source.merge(destination,how='outer',indicator=True)
+    			transfered_records = comparission[comparission['_merge']=='both'].iloc[:,:-1]
+    			untransfered_records = comparission[comparission['_merge']!='both'].iloc[:,:-1]
+    			print(f'No of transfered records = {transfered_records.shape[0]}')
+    			print(f'No of untransfered records = {untransfered_records.shape[0]}')
+    			print(untransfered_records)
+
+
+	
+1967 --> last 2 reports
+
+plotly.subplots
+plotly.graph_objects
+	

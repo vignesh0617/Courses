@@ -1,0 +1,392 @@
+Dash: (Frame work used for building interactive web apps, dashboards using python)
+-----
+
+
+Recomended themes : morph , 
+
+
+5th April 2023: 
+
+Theory:
+-------
+
+	1) If we try to run a dash app without any html, it will throw an error. 
+		We need to add atleast one html element to run dash app.
+
+	2) __name__ variable stores __main__ value, if its the current module that is directly been runing.
+		If we import any module the __name__ variable will store the filename.
+
+	3) Use app = JupyterDash(__name__) for qucikly rendering a sample of webpage inside the juypter notebook itslef. Its useful for qucikly debugging webapp
+		app.run_server(mode='inline')
+
+	4) imports required for building interactive dashboard
+		
+		from dash import Dash, html, dcc  // {dcc (dash core components) it is a function for creating and add elements such as drop downs etc..}
+		from dash.dependencies import Output, Input , State, no_update// {these are used for backend calls and adding interactivity}
+		from jupyter_dash import JupyterDash  // {used for displaying web preview in jupyter notebook itself}
+		import dash_bootstrap_components as dbc
+		from dash.exceptions import PreventUpdate
+		import pandas as pd
+		import plotly.express as px
+
+
+	Here: State is used to access contents of a variable, and does not force the call back function to execute. Where as Input will force the call back function to execute
+	In other words :
+		Input --> Used to access the attribute value and trigger the call back function
+		State --> Used to access the attribute value but will not trigger the call back function
+
+
+	Eg : this is a simple demo that returns the input value once when the button is clicked
+
+		@app.callback(Output("sample","children"),[Input("button","n_clicks")],[State("input","value")])
+                def unknown(clicks,value):
+                    if clicks is None:
+                        PreventUpdate
+                    else:
+                        return value   
+
+		from dash.dependencies import no_update // this will tell that the specific output used in a call back need not be updated 
+
+
+============================================================================================================================================
+
+Coding:
+--------
+
+	1) Simple code to create a simple dash app
+
+                from dash import Dash,html
+
+                app = Dash(__name__)
+
+                app.layout = html.Div([
+                    html.H1("Success Vignesh")
+                ])
+
+                if __name__ == "__main__":
+                    app.run_server()
+
+
+	2) app.run_server() attributes:
+		2.1) port = 8051 // used for changing the port number where the web page is hosted
+		2.2) debug = True // gives more error msg's for debugging
+		2.3) host = "0.0.0.0" // for changing port number and host address
+		2.4) height/width // for changing h and w of application in pixels or %
+
+
+	3) dcc (dash core components) methods for creating front end : // (note these all are only for building dashboards for web apps there are whole lot more)
+
+		3.1) Dropdown --> used to select single or multiple list of pre-defined options
+
+			Eg : dcc.Dropdown( 
+					options = <list of values> , 
+					// options = df["<col name>"].unique()
+					// options = list(df.select_dtypes(include = "numebr" ).columns)
+					// options = [ 
+								{"value": <passed in call back func> , "label" : <value shown in front end>} ,
+								{"value": <passed in call back func> , "label" : <value shown in front end>} ,
+								{"value": <passed in call back func> , "label" : <value shown in front end>} ,
+							]
+					// options = [
+								{"label" : <varname> , "value" : <varname> for <varname> in df.columns}
+					]
+					id = '<name for identifying this element>' , 
+					value = '<give a single value as default value>', // when multi is set to true, the values returned will be a 																	list of values and a single string
+					multi = True/False // {False is default value}
+				)
+
+			filter condition key words: 	1) normal : ==, !=
+							 	2) sql : in, not in
+		3.2) Slider --> Slider for selecting single value from list
+
+			dcc.Slider(id = <any id> ,min,max,step,value=<single value>)
+
+			filter condition key words: 	1) normal : ==, < ,> ,<= ,>=
+
+		3.3) RangeSlider --> Slider for selecting single range of values from list
+
+			dcc.Slider(id = <any id> ,min,max,step,value = (start value,end value))
+
+
+			filter condition key words: 	1) normal : .between(start,end)
+
+		3.4) Checklist ---> Multiselect check boxes from a list
+
+
+			Eg : dcc.Checklist( 
+					options = <same as dropdwon>
+					id = '<name for identifying this element>' , 
+					value = '<give the default values as a list>'
+					
+				)
+
+			filter condition key words: 	1) normal : ==, !=
+							 	2) sql : in, not in
+
+		3.5) RadioItems ---> single select radio buttons
+
+			Eg : dcc.RadioTtems( 
+					options = <same as dropdwon>
+					id = '<name for identifying this element>' , 
+					value = '<give a single value as default value>'
+					
+				)
+			filter condition key words: 	1) normal : ==, !=
+							 	2) sql : in, not in
+
+		3.6) DatePickerSingle--> Dropdown calendar to select a single date
+
+
+			dcc.DatePickerSingle(
+                        id = "date",
+                        min_date_allowed = "1999-10-17",
+                        max_date_allowed = "1999-10-27",
+                        display_format = "DD-MM-YYYY",
+                        date = "1999-10-14" //this will be default selected date
+                    )
+
+			filter condition key words: 	1) normal : ==, < ,> ,<= ,>=
+
+		3.7) DatePickerRange --> Dropdown calendar to select a single date range
+
+			dcc.DatePickerRange(
+                        id = "date",
+                        min_date_allowed = "1999-10-17",
+                        max_date_allowed = "1999-10-27",
+                        display_format = "DD-MM-YYYY",
+                        start_date = "1999-10-14",
+                        end_date = "1999-10-14"
+                    )
+
+			filter condition key words: 	1) normal : .between(start,end)
+
+		3.8) Tabs ---> tabs for navigating different views of apps
+
+			dcc.Tabs([
+				dcc.Tab([
+					.....
+				],label = "Tab1"),
+				
+				dcc.Tab([
+					.....
+				],label = "Tab2"),
+			])
+
+
+		3.9) Graph --> container for plotlly graphs
+
+			Eg: dcc.Graph(
+					id = "<id for identifying chart>",
+					figure = <any px chart>
+				
+				)
+
+		3.10 ) Store --> used for storing values inside web browser
+
+			dcc.Store(id='local', storage_type='local' / 'session')
+
+
+		3.10) dcc.Download() ----------> Used for downloading data from webapp. ( https://dash.plotly.com/dash-core-components/download ) for detail info refer that link
+
+
+			Note : "data" is the property wich will be downloaded. To download a data as an excel file use the below code snippet
+				  dcc.send_data_frame( <pandas_var_name>.to_excel, "<filename>.xlsx" , sheet_name = "<any_sheet_name>")
+
+			from dash import Dash, html, dcc
+			from dash.dependencies import Output, Input
+			import pandas as pd
+			
+
+			df = pd.(...) // here get the data into df varaiable 
+			
+			app.layout = html.Div([
+				html.Button("Download Excel", id="download_button"),
+				dcc.Download(id="data_to_download")
+			])
+
+
+			@app.callback(
+				Output("data_to_download","data"),
+				Input("download_button","n_clicks")
+			)
+			def download_data(n_clicks):
+				return dcc.send_data_frame(df.to_excel, "file_name.xlsx", sheet_name = "sheet_name" )
+
+			app.run_server()
+
+	4) Call back functions:
+		Note : these functions will only add interactivity between front end and backend
+
+		annotatate a function with with @app.callback( Output(), Input()) to trigger a function in backend
+
+		Eg for simple one input one output:
+
+				from dash.exceptions import PreventUpdate
+
+                        @app.callback( 
+                            Output("<id name for output element>","<property name where the output should affect>"), 
+                            Input("<id name for input element>","<property name where the input should come from>")
+                        )
+                        def funtion_name(<input var>):
+				     if not <input var>:
+        					raise PreventUpdate // this will prevent the function from runing if there is no default value passed
+                            .....
+				    .....
+				    .....
+				    return ...	
+
+		Eg for multiple input & multiple output:
+
+                        @app.callback( 
+                            Output("<id name for output element>","<property name where the output should affect>"),
+				    Output("<id name for output element>","<property name where the output should affect>"),
+				    Output("<id name for output element>","<property name where the output should affect>"),
+                            Input("<id name for input element>","<property name where the input should come from>")
+                            Input("<id name for input element>","<property name where the input should come from>")
+                            State("<id name for input element>","<property name where the input should come from>") // this state wont trigger call back
+                        )
+                        def funtion_name(<input var1>,<input var2>,<input var3>):
+				     if not <input var>:
+        					raise PreventUpdate // this will prevent the function from runing if there is no default value passed
+                            .....
+				    .....
+				    .....
+				    return out1, out2, out3
+	
+
+	5) Steps to use multiple pages in dash app.
+		5.1) Step one : create a separate folder called pages and define all the pages to be rendered there
+		5.2) Step two: 
+
+			For all the pages inside "pages" folder follow the below coding procedure
+
+                            from dash import Dash, html, dcc, callback
+                            import dash
+
+                            dash.register_page(__name__,path="/pages/1")
+
+                            layout = html.Div([
+                                "This is page 1"
+                            ])
+
+				    @callback(Output(),Input())
+				    def func_name():
+						....
+						....
+
+		5.3) Step three : In the main app add the below lines
+
+			app = Dash(__name__ , use_pages = True)
+			
+			app.layout= html.Div([
+				.....
+				.....
+				dash.pages_container	
+			])
+
+
+
+=============================================================================================================================================
+
+Understanding:
+---------------
+
+1) Use the below code to execute a function automatically to check if a user is authenticated or not before navigating to other pages
+	Note : here we are using concept from step 5.1, 5.2 & 5.3
+
+
+app.layout = html.Div([
+    dcc.Location(id="url2"),
+    dash.page_container
+    ])
+
+user_validated = <ur own logic>
+
+@callback(Output("url2","pathname"),Input("_pages_location","pathname"))
+def test(pathname1):
+    if user_validated:
+        raise PreventUpdate
+    else:
+        return "/"
+
+2) For storing any variables as an address and then accessing using the address to access the variable
+
+import ctypes
+x = 10
+address = id(x)
+y = ctypes.cast(address, ctypes.py_object).value
+print(x)  
+print(y)  
+
+
+
+	3) Use "allow_duplicate = True" in callback functions to use an ID as an output in more than 1 callback function
+		
+            @callback(
+                Output('url1',"pathname",allow_duplicate=True),
+                Input("redirect","n_clicks"),prevent_initial_call=True
+                )
+            def redirect(n_clicks):
+                if n_clicks is None:
+                    raise PreventUpdate
+                return main_app.environment_details['dashboard_home_page_link']
+
+		Note : 
+
+	4) Use property "active = True" inside dbc.Navlink to properly highlight the current active link in navbar
+
+	5) dcc.Graph() --> it has an attribute called "clickData" that gives info of where the click was made in the graph. This click data can be passed to 
+				Input() of any callback functions 
+
+
+		Code snippet to get the label and value where the chart was clicked.
+			label = clickData['points'][0]['label']
+    			value = clickData['points'][0]['value']
+
+=============================================================================================================================================
+
+Sample codes for practice:
+--------------------------
+
+from dash import Dash, dcc, html
+from dash.dependencies import Output, Input
+from jupyter_dash import JupyterDash
+import plotly.express as px
+import pandas as pd
+import numpy as np
+df = pd.DataFrame()
+df['x'] = (np.random.rand(25)*10).round(0)
+df['y'] = (np.random.rand(25)*10).round(0)
+df['dataset'] = [1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5]
+
+scatter_plot = px.scatter(data_frame=df,x='x',y='y')
+
+
+app = JupyterDash(__name__)
+
+app.layout = html.Div([
+    "Choose dataset : ",
+    dcc.Dropdown(
+        options = ["All",1,2,3,4,5],
+        id = 'scatter-input',
+        value = "All"
+    ),
+    dcc.Graph(
+        id = 'scatter-output',
+        figure = scatter_plot
+    )
+    
+])
+
+@app.callback(Output("scatter-output","figure"),Input("scatter-input","value"))
+def update_scatter_plot(dataset):
+    
+    if dataset == 'All':
+        return scatter_plot
+    else:
+        filtered_data = df.query(f" dataset == {dataset}") or filtered_data = df.query(" dataset == @dataset ")
+        return px.scatter(data_frame= filtered_data,x='x',y='y')
+
+
+if(__name__ == '__main__'):
+    app.run_server(mode = "inline")

@@ -1,0 +1,79 @@
+9th Sep 2024:
+
+PYTEST :
+--------
+
+	a) assert :
+		used for testing if a given condition is true or not
+
+		Syntax : assert <condtion> , "<Error msg (optional)>"
+
+		Eg :
+
+			File Name : test_one.py
+
+			Code :
+				def test_firstFucntion():
+					assert 10 == 1 , "option error message . Failing intentionally"
+				
+				def test_secondFunction():
+					assert 10 == 10 
+
+			Running from cmd line : -v pytest <specific file / folder path>
+				
+				
+
+
+
+
+USEFUL TIPS :
+-------------
+
+1) To get all list of packages installed inside a textfile use command :
+	pip freeze > <filename>.txt
+
+	Eg : pip freeze > requirements.txt
+
+2) Naming convention :
+
+	i) File :
+		a) test_<filename>.py
+		b) <filename>_test.py
+
+	ii) Functions:
+		a) def test_<functionname>() :
+
+3) Running pytest :
+	i) From command prompt :
+
+		code : pytest <filepath> ------> normal mode. This will search for all files under the file path and runs all files having name test_*.py
+		     : -v pytest <filename> ---> verbose mode. This will run only the specific file test functions.
+
+	ii) Running from pycharm :
+		prerequisites :  Change default testrunner from unittest to pytest
+					File --> Settings --> Tools --> Python Integrated tools --> Change unit test to pytest
+
+		Running : Right click on file and select run
+		Note : The test will run only from the point where the cursor is placed. If u want to run the entrie file, keep the cursor at top and then run, 
+				else keep the cursor under the function for which u want to test.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
