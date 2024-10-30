@@ -1,0 +1,11 @@
+orcale to snowflake data migration what is the process
+
+snowflake is the platform in between
+
+how to optmise cloud perfomance in snowflake
+
+difference btw platform and database
+
+snowdatabase configuration
+
+dbt and meltano tool

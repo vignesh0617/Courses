@@ -1,0 +1,92 @@
+PYTHON TEACHING BASICS :
+-----------------------
+
+Basic info on Python :
+----------------------
+	
+	1) Python is case sensitive.
+	2) It run on interpretor system --> (i.e) code is run line by line and not complied together as a whole and then run
+	3) Indendations are important in python. They are part of syntax.
+
+=================================================================== SESSION 1 ==============================================================================
+
+Variables in Python :
+---------------------
+
+	Points to remeber : 
+		1) we can create a variable and store any kind of data. No need to explicitly mention what type of data a variable should hold
+				Eg : x = 1 // here x is of int type
+				     x = 'python' // here x is of string data type
+
+		2) Reserverd keywords can not be used as variable names. Eg for, while, if etc... are key words that can't be used as variable names
+				    
+
+	1) Valid variable names
+			2.1) varname -------------> normal naming convention
+			2.2) var_name ------------> can include "_" (underscores) | _ is the only spl symbol allowed in var names
+			2.3) varName / VarName ---> camel case / Pascal case naming
+			2.4) _var_name -----------> can start with underscores
+			2.5) VARNAME -------------> full capital letters are used when the variable value remains a constant
+
+			2.6) var name should not start with numbers and must not contain any spl symbols or spaces.
+					Eg 1varname, var name ---> these 2 are invalid variable names
+
+
+	2) Typer a variables :
+			3.1) Global variable  ----> usually declared on top of all functions. This can be used any where
+			3.2) Local variable ------> declared within a function and it can't be accessed outside the function
+
+
+Data types in Python
+---------------------
+
+	------------------------------------------------------------------
+	| NOTE : ALL THE BELOW KEYWORDS CAN BE USED FOR TYPECASTING ALSO |
+	------------------------------------------------------------------
+
+	Number :
+		1) int ------------> integer is a whoe number 
+		2) float ----------> float is a decimal number
+		3) complex --------> very very rarely used (no need for us, just for knowledge know it)
+	
+	Text :
+		4) str ------------> String is sequence of characters
+
+	Boolean :
+		5) bool -----------> boolean is True or False
+	
+	Sequence:
+		6) list(array) ----> Collection of items
+						Note : list and arrays are different in python. To create an array use numpy package, which will be useful for 									 mathematical operations
+		7) tuple ----------> tuple are immutable lists
+		8) range ----------> used for looping and createing lists in sequence
+
+	Set :
+		9) set ------------> unordered collection of uniques objects inside {}
+
+	Mapping :
+		10) dict -----------> unordered key value pair dictionary
+
+	None Type :
+		11)None -----------> its none!! 
+
+
+	Extra :
+	12)enumerate ------> used with iterable.IT gives index and each items of the iterable when used in loop
+
+
+	###############################################################################################################################
+		Code:
+			for index,value in enumerate('VIGNESH'):
+				print(index,value)
+		output:
+			0 V
+			1 I
+			2 G
+			3 N
+			4 E
+			5 S
+			6 H
+			
+	###############################################################################################################################
+

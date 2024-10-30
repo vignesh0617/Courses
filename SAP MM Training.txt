@@ -1,0 +1,23 @@
+SAP MM COURSE UDEMEY
+
+16TH SEP:
+---------
+
+Life cycle of a purchase order:
+	1) Purchase order : First Purchare is created by the business to the vendor
+	2) Goods receipt (GR) : Receiving the goods into the ware house
+	3) Invoice receipt (IR) : Then invoice is generated ang given to the business by the venor
+	4) Payment : Finally payment is made to the vendor.
+
+
+
+
+
+
+---------------------------------------------------------------
+Useful tips:
+------------
+	1) Enabling transaction codes in SAP GUI
+		Go to Extras --> Settings --> check the box Display technical names
+
+

@@ -1,0 +1,119 @@
+				-------------------------------
+				| SAP - Sales and Distribution|
+				-------------------------------
+
+Theory :
+--------
+
+5th Dec :
+_________
+
+Sales Order Cycle :
+
+	In B2B (Business to Business), for buying goods from another business, the below steps will happen
+		a) RIF --------> 	Request of Information . 
+					It is an informal way of asking the
+					seller to give an price details of the requestd products.
+					It is called as INQURIY
+
+		b) QUOTATION -->  After Inquiry , Quotation is  sent. Its the formal way of asking for
+					products from a business. Quotation can be created in 2 ways
+						i) with reference --> after inquiry is completed, we just use the 
+									    inquiry number for creating a quotation.
+									    this prevents the renentering the same data again
+						ii) standalone -----> creating a quation from scratch
+
+13th Dec :
+__________
+			
+		c) Purchase order (for buyer) / Sales order (for seller)
+					Inquiry & Quation are called "Pre Sales" , its just asking for information.
+					There is no confirmation that someone will buy products.
+					But purchase order is the step, that confirms someone will buy products.
+
+
+
+============================================================================================================================
+
+
+Practicals:
+-----------
+
+5th Dec :
+_________
+
+
+1) STEPS TO CREATE AN INQUIRY :
+	
+
+	1.1) GUI --> Enter transaction code VA11 --> Press Enter
+
+		1.1) {alternate} SAP menu/Logistics/Sales and Distribution/Sales/Inquriy/Create(VA11)
+
+
+	1.2) Enter data for
+		a) Inquiry type
+		b) Organizantional data & press enter
+
+	1.3) Enter the header data
+		a) Customer number
+		b) Purchase order numer
+
+	1.4) Enter line item level details ,i.e material, quantity required , press enter
+
+	1.5) Inquiry number will appear at the left bottom, note it down if wanted.
+
+
+
+2) STEPS TO CREATE AN QUOTATION :
+
+	2.1) GUI --> Enter transaction code VA21 --> Press Enter
+
+		2.1) {alternate} SAP menu/Logistics/Sales and Distribution/Sales/Quotation/Create(VA11)
+		
+	2.2) Enter data for
+		a) Quotation type / Doc type
+		b) Organizantional data & press enter
+
+	
+	2.3) Creating a quotation with referenece :
+		i) Click on "Create with reference" at top left.
+		ii) Search for the inquriy number using search option and after finding the inquiry number, select it click on "copy"
+		iii) Then u can select all items from the inquiry or select only certain items from the inquiry.
+
+
+13th Dec:
+_________
+	
+3) Steps to create purchase order:
+	3.1) T-code = VA01 
+		3.1) SAP menu/Logistics/Sales and Distribution/Sales/Order/Create(VA01)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

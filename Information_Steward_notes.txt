@@ -1,0 +1,20 @@
+Information Steward Rules Writing Syntax : 
+-------------------------------------------
+
+Basic Syntax:
+
+	Declare
+		$<var_name1> <dt_type>;
+		$<var_name2> <dt_type2>;
+		$<var_name3> <dt_type3>;
+		$<var_name4> <dt_type5>;
+
+	Begin
+		$<var_name1> = <any value1>;
+		$<var_name2> = <any value2>;
+		$<var_name3> = <any value3>;
+		$<var_name4> = <any value4>;
+
+		<Logincal Functions>
+	End
+

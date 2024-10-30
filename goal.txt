@@ -1,0 +1,20 @@
+
+Tools to master:
+
+----------------
+
+Metasploit - start date : 29 dec - end date : 25th jan
+
+Netcat     -
+
+Nmap       -
+
+Burpsuite  -
+
+Dirbuster  -
+
+Gobuster   -
+
+Nessus     -
+
+Accunetix  -
