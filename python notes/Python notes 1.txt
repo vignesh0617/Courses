@@ -51,9 +51,9 @@ a)Fundamental Data types
 	2) float -> float is a decimal number    | x = 10.4569 , y = int(float("%.2f" %x)) . use "%.<n>f" %<varname> for rounding off a number
 	3) bool -> boolean is true or false
 	4) str -> String is sequence of characters
-	5) list(array) -> Collection of items
-	6) tuple -> tuple are immutable lists
-	7) set -> unordered collection of uniques objects inside {}
+	5) list(array) -> Collection of items . mutable , allows duplicates.
+	6) tuple -> tuple are immutable lists . immutable, allows duplicates.
+	7) set -> unordered collection of uniques objects inside {} . mutable , only unique values.
 	8) dict -> unordered key value pair dictionary
 	9) complex -> very very rarely used
 	10)None -> its none!! 
